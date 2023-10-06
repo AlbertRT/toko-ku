@@ -31,25 +31,25 @@ export default function Navbar() {
 							<NavigationMenuContent>
 								<div className="w-max p-2 grid grid-cols-2 gap-2">
 									<Link
-										href={`${toko}/data-barang`}
+										href={`/dashboard/${toko}/data-barang`}
 										className="p-2 hover:bg-muted transition-colors rounded text-sm"
 									>
 										Data Barang
 									</Link>
 									<Link
-										href={`${toko}/data-merchant`}
+										href={`/dashboard/${toko}/data-merchant`}
 										className="p-2 hover:bg-muted transition-colors rounded text-sm"
 									>
 										Data Merchant
 									</Link>
 									<Link
-										href={`${toko}/transaksi/riwayat-transaski`}
+										href={`/dashboard/${toko}/transaksi/riwayat-transaski`}
 										className="p-2 hover:bg-muted transition-colors rounded text-sm"
 									>
 										Riwayat Transaksi
 									</Link>
 									<Link
-										href={`${toko}/transaksi/baru`}
+										href={`/dashboard/${toko}/transaksi/baru`}
 										className="p-2 hover:bg-muted transition-colors rounded text-sm"
 									>
 										Buat Transaksi Baru

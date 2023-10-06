@@ -6,7 +6,7 @@ export default function Layout({ children }) {
 		<>
 			<Navbar />
 			<div className="px-10 py-6">
-				<div className="mt-4">{children}</div>
+				{children}
 			</div>
 		</>
   );
