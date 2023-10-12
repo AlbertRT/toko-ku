@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id        Int      @id @default(autoincrement())
+    node_id   String   @unique @default(uuid())
+    fullName  String
+    email     String   @unique
+    phone     String   @unique
+    address   String
+    toko_id   String
+    toko      Toko     @relation(fields: [toko_id], references: [node_id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Toko {
+    id          Int        @id @default(autoincrement())
+    node_id     String     @unique @default(uuid())
+    name        String
+    address     String
+    contact     String     @unique
+    description String
+    user        User[]
+    merchant    Merchant[]
+    createdAt   DateTime   @default(now())
+    updatedAt   DateTime   @updatedAt
+}
+
+model Merchant {
+    id        Int       @id @default(autoincrement())
+    node_id   String    @unique @default(uuid())
+    name      String
+    supplier  String
+    toko_id   String
+    toko      Toko      @relation(fields: [toko_id], references: [node_id])
+    product   Product[]
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+}
+
+model Product {
+    id            Int      @id @default(autoincrement())
+    node_id       String   @unique @default(uuid())
+    name          String
+    merchant_name String
+    merchant_id   String
+    price         Int
+    price_suffic  String   @default("/item")
+    quantity      Int      @default(1)
+    merchant      Merchant @relation(fields: [merchant_id], references: [node_id])
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+}

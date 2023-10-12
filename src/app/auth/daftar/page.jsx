@@ -1,12 +1,13 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function page() {
+	const router = useRouter();
 	const [formSteps, setFormSteps] = useState(2);
 	const [currentSteps, setCurrentSteps] = useState(1);
 	const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ export default function page() {
 		},
 		data_toko: {
 			name: "",
-			address: "",
+			addrss: "",
 			contact: "",
 			description: "",
 		},
@@ -28,6 +29,7 @@ export default function page() {
 		const label = e.target.getAttribute("aria-label");
 		const name = e.target.name;
 		const value = e.target.value;
+
 		setFormData((prev) => ({
 			...prev,
 			[label]: {
@@ -36,9 +38,21 @@ export default function page() {
 			},
 		}));
 	};
-    const onSubmit = async () => {
-        console.log(formData);
-    }
+	const onSubmit = async () => {
+		const response = await fetch("/api/user", {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(formData),
+		});
+
+		if (response.ok) {
+			router.push("masuk");
+		} else {
+			console.error(await response.json());
+		}
+	};
 
 	const onNextStep = () => setCurrentSteps((prevStep) => prevStep + 1);
 	const onPreviousStep = () => setCurrentSteps((prevStep) => prevStep - 1);
@@ -65,7 +79,7 @@ export default function page() {
 									aria-label="data_diri"
 									onChange={onChange}
 									autoComplete="off"
-                                    value={formData.data_diri.fullName}
+									value={formData.data_diri.fullName}
 								/>
 								<Input
 									placeholder="Email"
@@ -73,7 +87,7 @@ export default function page() {
 									aria-label="data_diri"
 									onChange={onChange}
 									autoComplete="off"
-                                    value={formData.data_diri.email}
+									value={formData.data_diri.email}
 								/>
 								<Input
 									placeholder="No HP"
@@ -81,7 +95,7 @@ export default function page() {
 									aria-label="data_diri"
 									onChange={onChange}
 									autoComplete="off"
-                                    value={formData.data_diri.phone}
+									value={formData.data_diri.phone}
 								/>
 								<Input
 									placeholder="Alamat"
@@ -89,7 +103,7 @@ export default function page() {
 									aria-label="data_diri"
 									onChange={onChange}
 									autoComplete="off"
-                                    value={formData.data_diri.address}
+									value={formData.data_diri.address}
 								/>
 							</div>
 						</>
@@ -106,15 +120,15 @@ export default function page() {
 									aria-label="data_toko"
 									onChange={onChange}
 									autoComplete="off"
-                                    value={formData.data_toko.name}
+									value={formData.data_toko.name}
 								/>
 								<Input
 									placeholder="Alamat Toko"
-									name="address"
+									name="addrss"
 									aria-label="data_toko"
 									onChange={onChange}
 									autoComplete="off"
-                                    value={formData.data_toko.address}
+									value={formData.data_toko.addrss}
 								/>
 								<Input
 									placeholder="No Telp / Email Toko"
@@ -122,15 +136,15 @@ export default function page() {
 									aria-label="data_toko"
 									onChange={onChange}
 									autoComplete="off"
-                                    value={formData.data_toko.contact}
+									value={formData.data_toko.contact}
 								/>
 								<Textarea
 									className="resize-none col-span-2 h-10"
 									placeholder="Tentang Toko"
 									name="description"
 									aria-label="data_toko"
-                                    value={formData.data_toko.description}
-                                    onChange={onChange}
+									value={formData.data_toko.description}
+									onChange={onChange}
 								/>
 							</div>
 						</>
