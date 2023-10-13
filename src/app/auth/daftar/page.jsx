@@ -1,7 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Button, Input, Textarea } from "@nextui-org/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -74,36 +72,40 @@ export default function page() {
 							</span>
 							<div className="mt-4 grid grid-cols-2 gap-4">
 								<Input
-									placeholder="Nama Lengkap"
+									placeholder="John Doe"
+									variant="bordered"
+									label="Nama Lengkap"
+									labelPlacement="inside"
 									name="fullName"
-									aria-label="data_diri"
-									onChange={onChange}
+									aria-label="fullName"
 									autoComplete="off"
-									value={formData.data_diri.fullName}
 								/>
 								<Input
-									placeholder="Email"
+									placeholder="example@mail.com"
+									variant="bordered"
+									label="Email"
+									labelPlacement="inside"
 									name="email"
-									aria-label="data_diri"
-									onChange={onChange}
+									aria-label="email"
 									autoComplete="off"
-									value={formData.data_diri.email}
 								/>
 								<Input
-									placeholder="No HP"
+									placeholder="081234567890"
+									variant="bordered"
+									label="No. HP"
+									labelPlacement="inside"
 									name="phone"
-									aria-label="data_diri"
-									onChange={onChange}
+									aria-label="phone"
 									autoComplete="off"
-									value={formData.data_diri.phone}
 								/>
 								<Input
-									placeholder="Alamat"
+									placeholder="Alamat Lengkap"
+									variant="bordered"
+									label="Alamat"
+									labelPlacement="inside"
 									name="address"
-									aria-label="data_diri"
-									onChange={onChange}
+									aria-label="address"
 									autoComplete="off"
-									value={formData.data_diri.address}
 								/>
 							</div>
 						</>
@@ -114,37 +116,42 @@ export default function page() {
 							</span>
 							<div className="mt-4 grid grid-cols-2 gap-4">
 								<Input
-									placeholder="Nama Toko"
-									className="col-span-2"
+									placeholder="Masukan Nama Toko"
+									variant="bordered"
+									label="Nama Toko"
+									labelPlacement="inside"
 									name="name"
-									aria-label="data_toko"
-									onChange={onChange}
+									aria-label="name"
 									autoComplete="off"
-									value={formData.data_toko.name}
 								/>
 								<Input
-									placeholder="Alamat Toko"
+									placeholder="Masukan Alamat Lengkap"
+									variant="bordered"
+									label="Alamat Toko"
+									labelPlacement="inside"
 									name="addrss"
-									aria-label="data_toko"
-									onChange={onChange}
+									aria-label="addrss"
 									autoComplete="off"
-									value={formData.data_toko.addrss}
 								/>
 								<Input
-									placeholder="No Telp / Email Toko"
+									placeholder="081234567890"
+									variant="bordered"
+									label="No.Toko"
+									labelPlacement="inside"
 									name="contact"
-									aria-label="data_toko"
-									onChange={onChange}
+									aria-label="contact"
 									autoComplete="off"
-									value={formData.data_toko.contact}
+									className="col-span-2"
 								/>
 								<Textarea
-									className="resize-none col-span-2 h-10"
-									placeholder="Tentang Toko"
+									placeholder="Deskripsi"
+									variant="bordered"
+									label="Deksripsi"
+									labelPlacement="inside"
 									name="description"
-									aria-label="data_toko"
-									value={formData.data_toko.description}
-									onChange={onChange}
+									aria-label="description"
+									autoComplete="off"
+									className="col-span-2"
 								/>
 							</div>
 						</>
@@ -156,17 +163,27 @@ export default function page() {
 					</Link>
 				</div>
 				<div className="mt-4 flex justify-end space-x-4">
-					<Button
-						variant="outline"
-						disabled={formSteps > currentSteps}
-						onClick={onPreviousStep}
-					>
-						Kembali
-					</Button>
 					{currentSteps === 1 ? (
-						<Button onClick={onNextStep}>Lanjut</Button>
+						<Button
+							variant="flat"
+							color="primary"
+							onClick={onNextStep}
+						>
+							Lanjut
+						</Button>
 					) : (
-						<Button onClick={onSubmit}>Daftar</Button>
+						<>
+							<Button
+								variant="bordered"
+								disabled={currentSteps < formSteps}
+								onClick={onPreviousStep}
+							>
+								Kembali
+							</Button>
+							<Button variant="flat" color="primary">
+								Daftar
+							</Button>
+						</>
 					)}
 				</div>
 			</div>

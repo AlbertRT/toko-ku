@@ -1,6 +1,7 @@
 import { Toaster } from "sonner";
 import "./globals.css";
 import localFont from "next/font/local";
+import Providers from "./providers";
 
 const inter = localFont({ src: "./font/Inter-Regular.ttf" });
 
@@ -12,8 +13,10 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body className={`${inter.className}`}>
-				<>{children}</>
-				<Toaster />
+				<Providers>
+					{children}
+					<Toaster />
+				</Providers>
 			</body>
 		</html>
 	);

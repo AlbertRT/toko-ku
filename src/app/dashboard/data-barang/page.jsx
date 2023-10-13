@@ -1,9 +1,5 @@
-"use client";
-
 import DataTable from "@/components/dataTable";
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 
 export default function page() {
 	const dataBarangCols = [
@@ -131,10 +127,6 @@ export default function page() {
 					<p className="font-medium text-muted-foreground ">
 						Data Barang
 					</p>
-					<Button>
-						<Plus className="mr-2 h-5 w-5" />
-						Tambah Barang
-					</Button>
 				</div>
 				<DataTable cols={dataBarangCols} data={rawDataBarang} />
 			</div>

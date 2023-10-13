@@ -1,5 +1,3 @@
-"use client";
-
 import DataTable from "@/components/dataTable";
 import React from "react";
 import { Button } from "@/components/ui/button";

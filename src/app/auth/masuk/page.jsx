@@ -1,12 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import { Button, Input } from "@nextui-org/react";
 
 export default function page() {
 	const router = useRouter();
@@ -35,10 +34,13 @@ export default function page() {
 				</div>
 				<div className="mt-4 flex flex-col space-y-4">
 					<Input
-						placeholder="Email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						label="email"
+						placeholder="example@mail.com"
+						variant="bordered"
+						label="Email"
+						labelPlacement="inside"
+						name="email"
+						aria-label="email"
+						autoComplete="off"
 					/>
 				</div>
 				<div className="mt-4">
@@ -48,18 +50,12 @@ export default function page() {
 				</div>
 				<div className="mt-4 flex justify-end space-x-4">
 					<Button
+						variant="flat"
+						color="primary"
 						className="w-full"
-						onClick={onSignIn}
-						disabled={isLoading}
+						isLoading={isLoading}
 					>
-						{isLoading ? (
-							<>
-								<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-								Loading
-							</>
-						) : (
-							"Masuk"
-						)}
+						Masuk
 					</Button>
 				</div>
 			</div>

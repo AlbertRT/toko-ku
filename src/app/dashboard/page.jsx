@@ -1,10 +1,8 @@
 "use client";
-
 import DataTable from "@/components/dataTable";
 import React from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { Tab, Tabs } from "@nextui-org/react";
 
 export default function page() {
 	const dataBarangCols = [
@@ -148,42 +146,16 @@ export default function page() {
 				</span>
 			</div>
 			<div className="my-4 border shadow rounded p-5">
-				<Tabs defaultValue="data-barang">
-					<TabsList>
-						<TabsTrigger value="data-barang">
-							Data Barang
-						</TabsTrigger>
-						<TabsTrigger value="data-merchant">
-							Data Merchant
-						</TabsTrigger>
-					</TabsList>
-					<TabsContent value="data-barang">
-						<div className="flex justify-between items-center mt-4">
-							<p className="font-medium text-muted-foreground ">
-								Data Barang
-							</p>
-							<Button>
-								<Plus className="mr-2 h-5 w-5" />
-								Tambah Barang
-							</Button>
-						</div>
+				<Tabs variant="bordered">
+					<Tab key="data-barang" title="Data Barang">
 						<DataTable cols={dataBarangCols} data={rawDataBarang} />
-					</TabsContent>
-					<TabsContent value="data-merchant">
-						<div className="flex justify-between items-center mt-4">
-							<p className="font-medium text-muted-foreground ">
-								Data Merchant
-							</p>
-							<Button>
-								<Plus className="mr-2 h-5 w-5" />
-								Tambah Merchant
-							</Button>
-						</div>
+					</Tab>
+					<Tab key="data-merchant" title="Data Merchant">
 						<DataTable
 							cols={dataMerchantCols}
 							data={rawDataMerchant}
 						/>
-					</TabsContent>
+					</Tab>
 				</Tabs>
 			</div>
 		</>

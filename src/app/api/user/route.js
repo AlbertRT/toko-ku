@@ -1,6 +1,5 @@
 import { db } from '@/lib/db'
 import { NextResponse } from 'next/server'
-import * as z from 'zod'
 
 export async function POST(req) {
     try {

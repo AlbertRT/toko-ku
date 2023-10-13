@@ -49,15 +49,16 @@ model Merchant {
 }
 
 model Product {
-    id            Int      @id @default(autoincrement())
-    node_id       String   @unique @default(uuid())
-    name          String
-    merchant_name String
-    merchant_id   String
-    price         Int
-    price_suffic  String   @default("/item")
-    quantity      Int      @default(1)
-    merchant      Merchant @relation(fields: [merchant_id], references: [node_id])
-    createdAt     DateTime @default(now())
-    updatedAt     DateTime @updatedAt
+    id              Int      @id @default(autoincrement())
+    node_id         String   @unique @default(uuid())
+    name            String
+    merchant_name   String
+    merchant_id     String
+    price           Int
+    price_suffix    String   @default("/item")
+    quantity        Int      @default(1)
+    quantity_suffix String   @default("/item")
+    merchant        Merchant @relation(fields: [merchant_id], references: [node_id])
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
 }
