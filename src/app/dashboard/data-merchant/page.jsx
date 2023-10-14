@@ -1,4 +1,4 @@
-import DataTable from "@/components/dataTable";
+import DataTable from "@/components/DataTable";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";

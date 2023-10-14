@@ -1,5 +1,5 @@
 "use client";
-import DataTable from "@/components/dataTable";
+import DataTable from "@/components/DataTable";
 import React from "react";
 import { Plus } from "lucide-react";
 import { Tab, Tabs } from "@nextui-org/react";

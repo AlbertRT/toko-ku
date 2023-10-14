@@ -1,114 +1,105 @@
-import DataTable from "@/components/dataTable";
+import DataTable from "@/components/DataTable";
 import React from "react";
+import { columns } from "./columns";
 
 export default function page() {
-	const dataBarangCols = [
-		{
-			field: "Nama Barang",
-		},
-		{
-			field: "Kuantitas",
-			className: "w-[110px]",
-		},
-		{
-			field: "Merchant",
-		},
-		{
-			field: "Kategori",
-		},
-		{
-			field: "Harga",
-		},
-	];
 	const rawDataBarang = [
 		{
+			no: 1,
 			id: "f913egfa",
 			nama_barang: "Susu UHT Greenfield Fullcream",
 			kuantitas: "39 item",
 			merchant: "Greenfield",
 			kategori: "Susu UHT",
-			harga: "7.900 /item",
+			harga: 7900,
 		},
 		{
+			no: 2,
 			id: "abc123",
 			nama_barang: "Mie Instan Indomie Rasa Ayam Bawang",
 			kuantitas: "50 item",
 			merchant: "Indomaret",
 			kategori: "Mie Instan",
-			harga: "2.500 /item",
+			harga: 2500,
 		},
 
 		{
+			no: 3,
 			id: "def456",
 			nama_barang: "Telur Ayam Kampung",
 			kuantitas: "30 butir",
 			merchant: "Pasar Tradisional",
 			kategori: "Telur",
-			harga: "2.000 /butir",
+			harga: 2000,
 		},
-
-		,
 		{
+			no: 4,
 			id: "ghi789",
 			nama_barang: "Beras Jasmine Premium",
 			kuantitas: "10 kg",
 			merchant: "Supermarket XYZ",
 			kategori: "Beras",
-			harga: "25.000 /kg",
+			harga: 25000,
 		},
 
 		{
+			no: 5,
 			id: "jkl012",
 			nama_barang: "Minyak Goreng Bimoli Botol 1 Liter",
 			kuantitas: "20 botol",
 			merchant: "Warung Pak Slamet",
 			kategori: "Minyak Goreng",
-			harga: "12.000 /botol",
+			harga: 12000,
 		},
 
 		{
+			no: 6,
 			id: "mno345",
 			nama_barang: "Gula Pasir",
 			kuantitas: "5 kg",
 			merchant: "Pasar Tradisional",
 			kategori: "Gula",
-			harga: "8.000 /kg",
+			harga: 8000,
 		},
 
 		{
+			no: 7,
 			id: "pqr678",
 			nama_barang: "Roti Tawar Gardenia",
 			kuantitas: "15 bungkus",
 			merchant: "Supermarket ABC",
 			kategori: "Roti",
-			harga: "10.500 /bungkus",
+			harga: 10500,
 		},
 
 		{
+			no: 8,
 			id: "stu901",
 			nama_barang: "Kopi Kapal Api Special Mix",
 			kuantitas: "10 sachet",
 			merchant: "Warung Kopi Jaya",
 			kategori: "Kopi",
-			harga: "5.000 /sachet",
+			harga: 5.0,
 		},
 
 		{
+			no: 9,
 			id: "vwx234",
 			nama_barang: "Sarden ABC Kaleng",
 			kuantitas: "25 kaleng",
 			merchant: "Minimarket XYZ",
 			kategori: "Sarden",
-			harga: "6.500 /kaleng",
+			harga: 6.5,
 		},
 
 		{
+			no: 10,
 			id: "yz0123",
 			nama_barang: "Sabun Mandi Lifebuoy",
 			kuantitas: "40 pcs",
 			merchant: "Apotek Sehat Sentosa",
 			kategori: "Sabun Mandi",
-			harga: "3.500 /pcs",
+			harga: 3500,
 		},
 	];
 
@@ -122,13 +113,8 @@ export default function page() {
 					Data Barang
 				</span>
 			</div>
-			<div className="my-4 border shadow rounded p-5">
-				<div className="flex justify-between items-center mt-4">
-					<p className="font-medium text-muted-foreground ">
-						Data Barang
-					</p>
-				</div>
-				<DataTable cols={dataBarangCols} data={rawDataBarang} />
+			<div className="my-4">
+				<DataTable columns={columns} data={rawDataBarang} />
 			</div>
 		</>
 	);
