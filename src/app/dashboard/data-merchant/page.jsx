@@ -1,21 +1,8 @@
 import DataTable from "@/components/DataTable";
+import { dataMerchantCols } from "@/lib/columns";
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 
 export default function page() {
-	const dataMerchantCols = [
-		{
-			field: "Merchant",
-		},
-		{
-			field: "Total Produk",
-			className: "w-[150px]",
-		},
-		{
-			field: "Supplier",
-		},
-	];
 	const rawDataMerchant = [
 		{
 			id: "4fa12fa",
@@ -35,17 +22,8 @@ export default function page() {
 					Data Merchant
 				</span>
 			</div>
-			<div className="my-4 border shadow rounded p-5">
-				<div className="flex justify-between items-center mt-4">
-					<p className="font-medium text-muted-foreground ">
-						Data Merchant
-					</p>
-					<Button>
-						<Plus className="mr-2 h-5 w-5" />
-						Tambah Merchant
-					</Button>
-				</div>
-				<DataTable cols={dataMerchantCols} data={rawDataMerchant} />
+			<div className="my-4">
+				<DataTable columns={dataMerchantCols} data={rawDataMerchant} />
 			</div>
 		</>
 	);
