@@ -1,40 +1,10 @@
 "use client";
+
 import DataTable from "@/components/DataTable";
-import React from "react";
-import { Plus } from "lucide-react";
+import { dataBarangColumns, dataMerchantCols } from "@/lib/columns";
 import { Tab, Tabs } from "@nextui-org/react";
 
 export default function page() {
-	const dataBarangCols = [
-		{
-			field: "Nama Barang",
-		},
-		{
-			field: "Kuantitas",
-			className: "w-[110px]",
-		},
-		{
-			field: "Merchant",
-		},
-		{
-			field: "Kategori",
-		},
-		{
-			field: "Harga",
-		},
-	];
-	const dataMerchantCols = [
-		{
-			field: "Merchant",
-		},
-		{
-			field: "Total Produk",
-			className: "w-[150px]",
-		},
-		{
-			field: "Supplier",
-		},
-	];
 	const rawDataBarang = [
 		{
 			id: "f913egfa",
@@ -145,19 +115,24 @@ export default function page() {
 					Data Barang dan Merchant
 				</span>
 			</div>
-			<div className="my-4 border shadow rounded p-5">
-				<Tabs variant="bordered">
-					<Tab key="data-barang" title="Data Barang">
-						<DataTable cols={dataBarangCols} data={rawDataBarang} />
-					</Tab>
-					<Tab key="data-merchant" title="Data Merchant">
-						<DataTable
-							cols={dataMerchantCols}
-							data={rawDataMerchant}
-						/>
-					</Tab>
-				</Tabs>
-			</div>
+			<Tabs
+				aria-label="dashboard table"
+				className="mt-4"
+				variant="bordered"
+			>
+				<Tab key="data-barang" title="Barang">
+					<DataTable
+						columns={dataBarangColumns}
+						data={rawDataBarang}
+					/>
+				</Tab>
+				<Tab key="data-merchant" title="Merchant">
+					<DataTable
+						columns={dataMerchantCols}
+						data={rawDataMerchant}
+					/>
+				</Tab>
+			</Tabs>
 		</>
 	);
 }

@@ -1,6 +1,6 @@
 import DataTable from "@/components/DataTable";
 import React from "react";
-import { columns } from "./columns";
+import { dataBarangColumns } from "@/lib/columns";
 
 export default function page() {
 	const rawDataBarang = [
@@ -114,7 +114,7 @@ export default function page() {
 				</span>
 			</div>
 			<div className="my-4">
-				<DataTable columns={columns} data={rawDataBarang} />
+				<DataTable columns={dataBarangColumns} data={rawDataBarang} />
 			</div>
 		</>
 	);

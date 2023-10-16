@@ -14,9 +14,10 @@ import {
 	Button,
 	DropdownMenu,
 	DropdownItem,
+	Pagination,
 } from "@nextui-org/react";
 import { renderCell } from "@/lib/renderCell";
-import { ChevronDown, SearchIcon } from "lucide-react";
+import { ChevronDown, Mail, SearchIcon } from "lucide-react";
 
 const INITIAL_VISIBLE_COLUMNS = [
 	"no",
@@ -32,10 +33,20 @@ export default function DataTable({ columns, data }) {
 		new Set(INITIAL_VISIBLE_COLUMNS)
 	);
 	const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
+	const [filterBy, setFilterBy] = useState(
+		columns.filter(
+			(column) =>
+				column.key !== "id" &&
+				column.key !== "no" &&
+				column.key !== "action"
+		)
+	);
 	const [sortDescriptor, setSortDescriptor] = React.useState({
-		column: "age",
+		column: "Nama Barang",
 		direction: "ascending",
 	});
+	const [filterValue, setFilterValue] = useState("");
+	const hasSearchFilter = Boolean(filterValue);
 
 	const headerColumns = useMemo(() => {
 		if (visibleColumns === "all") return columns;
@@ -45,13 +56,38 @@ export default function DataTable({ columns, data }) {
 		);
 	}, [visibleColumns]);
 
-	// const items = useMemo(() => {
+	const filteredItems = useMemo(() => {
+		let filteredData = [...data];
+		if (hasSearchFilter) {
+			filteredData = filteredData.filter((data) =>
+				data["nama_barang"]
+					.toLowerCase()
+					.includes(filterValue.toLowerCase())
+			);
+		}
+		return filteredData;
+	}, [data, filterValue, hasSearchFilter]);
 
-	// })
+	const rowsPerPage = 5;
+	const [page, setPage] = useState(1);
+	const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
-	// const sortedItem = useMemo(() => {
-	//     return [...items] =
-	// }, [sortDescriptor, items])
+	const items = useMemo(() => {
+		const start = (page - 1) * rowsPerPage;
+		const end = start + rowsPerPage;
+
+		return filteredItems.slice(start, end);
+	}, [page, filteredItems]);
+
+	const sortedItem = useMemo(() => {
+		return [...items].sort((a, b) => {
+			const first = a[sortDescriptor.column];
+			const second = b[sortDescriptor.column];
+			const cmp = first < second ? -1 : first > second ? 1 : 0;
+
+			return sortDescriptor.direction === "descending" ? -cmp : +cmp;
+		});
+	}, [sortDescriptor, items]);
 
 	const topContent = useMemo(() => {
 		return (
@@ -91,6 +127,18 @@ export default function DataTable({ columns, data }) {
 			</div>
 		);
 	}, [data.length, visibleColumns]);
+
+	const bottomContent = useMemo(() => (
+		<div className="flex w-full justify-end">
+			<Pagination
+				showControls
+				page={page}
+				total={pages}
+				onChange={(page) => setPage(page)}
+			/>
+		</div>
+	));
+
 	return (
 		<Table
 			topContent={topContent}
@@ -98,6 +146,7 @@ export default function DataTable({ columns, data }) {
 			isHeaderSticky
 			sortDescriptor={sortDescriptor}
 			onSortChange={setSortDescriptor}
+			bottomContent={bottomContent}
 		>
 			<TableHeader columns={headerColumns}>
 				{(column) => (
@@ -109,7 +158,7 @@ export default function DataTable({ columns, data }) {
 					</TableColumn>
 				)}
 			</TableHeader>
-			<TableBody items={data} emptyContent="No Data to display">
+			<TableBody items={sortedItem} emptyContent="No Data to display">
 				{(item) => (
 					<TableRow key={item.key}>
 						{(columnKey) => (
