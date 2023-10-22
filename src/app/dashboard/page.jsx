@@ -1,6 +1,7 @@
 "use client";
 
 import DataTable from "@/components/DataTable";
+import AddNewData from "@/components/Modal";
 import { dataBarangColumns, dataMerchantCols } from "@/lib/columns";
 import { Tab, Tabs } from "@nextui-org/react";
 

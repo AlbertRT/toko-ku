@@ -41,6 +41,7 @@ export default function page() {
 						name="email"
 						aria-label="email"
 						autoComplete="off"
+						onChange={(e) => setEmail(e.target.value)}
 					/>
 				</div>
 				<div className="mt-4">
@@ -54,6 +55,7 @@ export default function page() {
 						color="primary"
 						className="w-full"
 						isLoading={isLoading}
+						onClick={onSignIn}
 					>
 						Masuk
 					</Button>

@@ -77,8 +77,10 @@ export default function page() {
 									label="Nama Lengkap"
 									labelPlacement="inside"
 									name="fullName"
-									aria-label="fullName"
+									aria-label="data_diri"
 									autoComplete="off"
+									onChange={onChange}
+									value={formData.data_diri.fullName}
 								/>
 								<Input
 									placeholder="example@mail.com"
@@ -86,8 +88,10 @@ export default function page() {
 									label="Email"
 									labelPlacement="inside"
 									name="email"
-									aria-label="email"
+									aria-label="data_diri"
 									autoComplete="off"
+									onChange={onChange}
+									value={formData.data_diri.email}
 								/>
 								<Input
 									placeholder="081234567890"
@@ -95,8 +99,10 @@ export default function page() {
 									label="No. HP"
 									labelPlacement="inside"
 									name="phone"
-									aria-label="phone"
+									aria-label="data_diri"
 									autoComplete="off"
+									onChange={onChange}
+									value={formData.data_diri.phone}
 								/>
 								<Input
 									placeholder="Alamat Lengkap"
@@ -104,8 +110,10 @@ export default function page() {
 									label="Alamat"
 									labelPlacement="inside"
 									name="address"
-									aria-label="address"
+									aria-label="data_diri"
 									autoComplete="off"
+									onChange={onChange}
+									value={formData.data_diri.address}
 								/>
 							</div>
 						</>
@@ -121,8 +129,10 @@ export default function page() {
 									label="Nama Toko"
 									labelPlacement="inside"
 									name="name"
-									aria-label="name"
+									aria-label="data_toko"
 									autoComplete="off"
+									onChange={onChange}
+									value={formData.data_toko.name}
 								/>
 								<Input
 									placeholder="Masukan Alamat Lengkap"
@@ -130,8 +140,10 @@ export default function page() {
 									label="Alamat Toko"
 									labelPlacement="inside"
 									name="addrss"
-									aria-label="addrss"
+									aria-label="data_toko"
 									autoComplete="off"
+									onChange={onChange}
+									value={formData.data_toko.addrss}
 								/>
 								<Input
 									placeholder="081234567890"
@@ -139,9 +151,11 @@ export default function page() {
 									label="No.Toko"
 									labelPlacement="inside"
 									name="contact"
-									aria-label="contact"
+									aria-label="data_toko"
 									autoComplete="off"
+									onChange={onChange}
 									className="col-span-2"
+									value={formData.data_toko.contact}
 								/>
 								<Textarea
 									placeholder="Deskripsi"
@@ -149,9 +163,11 @@ export default function page() {
 									label="Deksripsi"
 									labelPlacement="inside"
 									name="description"
-									aria-label="description"
+									aria-label="data_toko"
 									autoComplete="off"
+									onChange={onChange}
 									className="col-span-2"
+									value={formData.data_toko.description}
 								/>
 							</div>
 						</>
@@ -180,7 +196,11 @@ export default function page() {
 							>
 								Kembali
 							</Button>
-							<Button variant="flat" color="primary">
+							<Button
+								variant="flat"
+								color="primary"
+								onClick={onSubmit}
+							>
 								Daftar
 							</Button>
 						</>

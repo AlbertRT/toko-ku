@@ -28,7 +28,7 @@ const INITIAL_VISIBLE_COLUMNS = [
 	"action",
 ];
 
-export default function DataTable({ columns, data }) {
+export default function DataTable({ columns, data, addNewComponent }) {
 	const [visibleColumns, setVisibleColumns] = useState(
 		new Set(INITIAL_VISIBLE_COLUMNS)
 	);
@@ -91,7 +91,7 @@ export default function DataTable({ columns, data }) {
 
 	const topContent = useMemo(() => {
 		return (
-			<div className="flex gap-4 flex-col">
+			<div className="flex gap-4">
 				<div className="flex gap-3">
 					<Input
 						isClearable
@@ -123,6 +123,7 @@ export default function DataTable({ columns, data }) {
 							))}
 						</DropdownMenu>
 					</Dropdown>
+					{addNewComponent}
 				</div>
 			</div>
 		);
