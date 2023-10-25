@@ -17,22 +17,18 @@ import {
 	Pagination,
 } from "@nextui-org/react";
 import { renderCell } from "@/lib/renderCell";
-import { ChevronDown, Mail, SearchIcon } from "lucide-react";
+import { ChevronDown, SearchIcon } from "lucide-react";
 
-const INITIAL_VISIBLE_COLUMNS = [
-	"no",
-	"nama_barang",
-	"kuantitas",
-	"kategori",
-	"harga",
-	"action",
-];
-
-export default function DataTable({ columns, data, addNewComponent }) {
+export default function DataTable({
+	columns,
+	data,
+	addNewComponent,
+	initialColumns,
+}) {
 	const [visibleColumns, setVisibleColumns] = useState(
-		new Set(INITIAL_VISIBLE_COLUMNS)
+		new Set(initialColumns)
 	);
-	const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
+	const [selectedKeys, setSelectedKeys] = useState(new Set([]));
 	const [filterBy, setFilterBy] = useState(
 		columns.filter(
 			(column) =>
@@ -41,7 +37,7 @@ export default function DataTable({ columns, data, addNewComponent }) {
 				column.key !== "action"
 		)
 	);
-	const [sortDescriptor, setSortDescriptor] = React.useState({
+	const [sortDescriptor, setSortDescriptor] = useState({
 		column: "Nama Barang",
 		direction: "ascending",
 	});

@@ -1,7 +1,5 @@
 "use client";
-
 import DataTable from "@/components/DataTable";
-import AddNewData from "@/components/Modal";
 import { dataBarangColumns, dataMerchantCols } from "@/lib/columns";
 import { Tab, Tabs } from "@nextui-org/react";
 
@@ -125,12 +123,26 @@ export default function page() {
 					<DataTable
 						columns={dataBarangColumns}
 						data={rawDataBarang}
+						initialColumns={[
+							"no",
+							"nama_barang",
+							"kuantitas",
+							"kategori",
+							"harga",
+							"action",
+						]}
 					/>
 				</Tab>
 				<Tab key="data-merchant" title="Merchant">
 					<DataTable
 						columns={dataMerchantCols}
 						data={rawDataMerchant}
+						initialColumns={[
+							"no",
+							"merchant",
+							"supplier",
+							"action",
+						]}
 					/>
 				</Tab>
 			</Tabs>

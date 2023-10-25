@@ -114,7 +114,18 @@ export default function page() {
 				</span>
 			</div>
 			<div className="my-4">
-				<DataTable columns={dataBarangColumns} data={rawDataBarang} />
+				<DataTable
+					columns={dataBarangColumns}
+					data={rawDataBarang}
+					initialColumns={[
+						"no",
+						"nama_barang",
+						"kuantitas",
+						"kategori",
+						"harga",
+						"action",
+					]}
+				/>
 			</div>
 		</>
 	);
