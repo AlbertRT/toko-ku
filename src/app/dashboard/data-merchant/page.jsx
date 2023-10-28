@@ -1,71 +1,35 @@
-"use client";
 import DataTable from "@/components/DataTable";
 import { dataMerchantCols } from "@/lib/columns";
-import {
-	Button,
-	Input,
-	Modal,
-	ModalBody,
-	ModalContent,
-	ModalFooter,
-	ModalHeader,
-	useDisclosure,
-} from "@nextui-org/react";
 import React from "react";
-import { addMerchantServerAction } from "../../../../actions/actions";
+import { AddNew } from "./component/AddNew";
+import { db } from "@/lib/db";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
-function AddNew() {
-	const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+async function getMerchant() {
+	const session = await getServerSession(authOptions);
 
-	return (
-		<>
-			<Button onClick={onOpen} variant="flat" color="primary">
-				Tambah Data
-			</Button>
-			<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-				<ModalContent>
-					<ModalHeader>Tambah Merchant</ModalHeader>
-					<form action={addMerchantServerAction}>
-						<ModalBody>
-							<Input
-								placeholder="e.g Greenfield"
-								variant="bordered"
-								label="Merchant"
-								labelPlacement="outside"
-							/>
-							<Input
-								placeholder="e.g Indofood TBK"
-								variant="bordered"
-								label="Supplier"
-								labelPlacement="outside"
-							/>
-						</ModalBody>
-						<ModalFooter>
-							<Button
-								color="success"
-								variant="flat"
-								type="submit"
-								onSubmit={(e) => e.preventDefault()}
-							>
-								Tambah
-							</Button>
-						</ModalFooter>
-					</form>
-				</ModalContent>
-			</Modal>
-		</>
-	);
+	try {
+		const { toko_id } = await db.user.findUnique({
+			where: { email: session?.user.email },
+		});
+
+		const data = await db.merchant.findMany({ where: { toko_id } });
+		const response = data.map((item, index) => ({
+			no: index + 1,
+			id: item.node_id,
+			merchant: item.name,
+			supplier: item.supplier,
+		}));
+
+		return response;
+	} catch (error) {
+		console.log(error);
+	}
 }
 
-export default function page() {
-	const rawDataMerchant = [
-		{
-			id: "4fa12fa",
-			merchant: "Greenfield",
-			total_produk: "39 item",
-			supplier: "Suplier XYZ",
-		},
-	];
+export default async function page() {
+	const data = await getMerchant();
 
 	return (
 		<>
@@ -80,7 +44,7 @@ export default function page() {
 			<div className="my-4">
 				<DataTable
 					columns={dataMerchantCols}
-					data={rawDataMerchant}
+					data={data}
 					addNewComponent={<AddNew />}
 					initialColumns={["no", "merchant", "supplier", "action"]}
 				/>

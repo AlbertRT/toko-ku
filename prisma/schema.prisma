@@ -39,7 +39,7 @@ model Toko {
 model Merchant {
     id        Int       @id @default(autoincrement())
     node_id   String    @unique @default(uuid())
-    name      String
+    name      String    @unique
     supplier  String
     toko_id   String
     toko      Toko      @relation(fields: [toko_id], references: [node_id])
